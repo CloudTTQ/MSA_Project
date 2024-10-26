@@ -24,7 +24,7 @@
 
 
 ## __Requirements__
- ### - Platform: Web and/or mobile app
+ ### - Platform: Mobile and/or web app
  ### - Design: Simple UI and UX specifically created for elderly users
  ### - __Features__:
  - __Ability to text, audio, and video chat with doctors__
