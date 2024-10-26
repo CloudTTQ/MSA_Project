@@ -43,7 +43,8 @@
 - __Online Prescriptions__: Doctors can provide online prescriptions directly through the app.
 
 ## Design Versions:
-- Version 0.1:
+### - Version 0.1:
+  Live design build: https://www.figma.com/proto/ChRD7m7RXnNXqrU8TEghBV/MSA-Wireframe?node-id=0-1&t=W7AsNKdHGADd7eN1-1
 
 ![Screenshot 2024-10-26 234425](https://github.com/user-attachments/assets/1a9a5418-7aa1-438c-9dc5-c7a650ed1676)
 
