@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native'
-import React, { useEffect } from 'react'
+import { View, Text } from "react-native";
+import React, { useEffect } from "react";
 
-import { useFonts } from 'expo-font'
-import { SplashScreen, Stack } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
+import { useFonts } from "expo-font";
+import { SplashScreen, Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+
+import GlobalProvider from "../context/GlobalProvider";
 
 import "../global.css";
 
@@ -20,22 +22,36 @@ const _layout = () => {
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
   });
 
-  useEffect(()=> {
-    if(error) throw error
-    if(fontsLoaded) SplashScreen.hideAsync()
-  }, [fontsLoaded, error])
+  useEffect(() => {
+    if (error) throw error;
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error]);
 
-  if(!fontsLoaded && !error) return null;
+  if (!fontsLoaded && !error) return null;
 
   return (
-    <>
+    <GlobalProvider>
       <Stack>
-          <Stack.Screen name="index" options={{headerShown:false}}></Stack.Screen>
-          <Stack.Screen name="(auth)" options={{headerShown:false}}></Stack.Screen>
+        <Stack.Screen
+          name="index"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="(auth)"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="(tabs)"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="(tabs_doctor)"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
       </Stack>
-      <StatusBar backgroundColor='#161622' style='light'/>
-    </>
-  )
-}
+      <StatusBar backgroundColor="#F7F7F7" style="dark" />
+    </GlobalProvider>
+  );
+};
 
-export default _layout
+export default _layout;
