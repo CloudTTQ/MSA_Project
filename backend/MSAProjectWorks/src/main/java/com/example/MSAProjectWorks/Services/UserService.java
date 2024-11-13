@@ -5,6 +5,7 @@ import com.example.MSAProjectWorks.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,25 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    //public List<User> getUsersByType(String userType) {
+    //  return userRepository.findByUserType(userType);
+    //}
+
     public User createUser(User user) {
+        // Set the creation date
+        user.setCreatedAt(new Date());
+
+        // Validation based on userType
+        if ("doctor".equalsIgnoreCase(user.getUserType())) {
+            if (user.getSpecialization() == null || user.getLicenseNumber() == null) {
+                throw new IllegalArgumentException("Doctor must have specialization and license number.");
+            }
+        } else if ("patient".equalsIgnoreCase(user.getUserType())) {
+            if (user.getAge() == null || user.getHealthConditions() == null) {
+                throw new IllegalArgumentException("Patient must have age and health conditions.");
+            }
+        }
+
         return userRepository.save(user);
     }
 

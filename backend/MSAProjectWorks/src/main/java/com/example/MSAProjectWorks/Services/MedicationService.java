@@ -14,24 +14,29 @@ public class MedicationService {
     @Autowired
     private MedicationRepository medicationRepository;
 
+    // Create new medication and assign it to a patient
     public Medication createMedication(Medication medication) {
         return medicationRepository.save(medication);
     }
 
+    // Update existing medication details by ID
     public Medication updateMedication(String id, Medication medicationDetails) {
         Optional<Medication> optionalMedication = medicationRepository.findById(id);
         if (optionalMedication.isPresent()) {
             Medication medication = optionalMedication.get();
             medication.setMedicationName(medicationDetails.getMedicationName());
-            medication.setDosage(medicationDetails.getDosage());
+            medication.setAssignedTo(medicationDetails.getAssignedTo());  // Ensure patient is linked via ID
+            medication.setPrescriptionId(medicationDetails.getPrescriptionId());
             medication.setFrequency(medicationDetails.getFrequency());
-            medication.setDuration(medicationDetails.getDuration());
+            medication.setDosage(medicationDetails.getDosage());
+            medication.setTakenToday(medicationDetails.getTakenToday());
             return medicationRepository.save(medication);
         } else {
             throw new RuntimeException("Medication not found with id " + id);
         }
     }
 
+    // Get full medication details by ID
     public String getFullMedicationDetails(String id) {
         Optional<Medication> optionalMedication = medicationRepository.findById(id);
         if (optionalMedication.isPresent()) {
@@ -41,6 +46,7 @@ public class MedicationService {
         }
     }
 
+    // Delete medication by ID
     public void deleteMedication(String id) {
         medicationRepository.deleteById(id);
     }

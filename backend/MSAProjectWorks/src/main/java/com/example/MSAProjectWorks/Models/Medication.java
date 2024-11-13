@@ -5,43 +5,55 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "medications")
 public class Medication {
+
     @Id
     private String id;
-    private String prescriptionId;
     private String medicationName;
-    private String dosage;
-    private String frequency;
-    private String duration;
+    private String assignedTo;  // Link to Patient by their ID (patient ID)
+    private Integer prescriptionId;
+    private Integer frequency;
+    private Integer dosage;
+    private Boolean takenToday;
 
+    // Default constructor
     public Medication() {}
 
-    public Medication(String prescriptionId, String medicationName, String dosage, String frequency, String duration) {
-        this.prescriptionId = prescriptionId;
+    // Parameterized constructor to create new medication
+    public Medication(String medicationName, String assignedTo, Integer prescriptionId, Integer frequency, Integer dosage, Boolean takenToday) {
         this.medicationName = medicationName;
-        this.dosage = dosage;
+        this.assignedTo = assignedTo;
+        this.prescriptionId = prescriptionId;
         this.frequency = frequency;
-        this.duration = duration;
+        this.dosage = dosage;
+        this.takenToday = takenToday;
     }
 
+    // Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
-
-    public String getPrescriptionId() { return prescriptionId; }
-    public void setPrescriptionId(String prescriptionId) { this.prescriptionId = prescriptionId; }
 
     public String getMedicationName() { return medicationName; }
     public void setMedicationName(String medicationName) { this.medicationName = medicationName; }
 
-    public String getDosage() { return dosage; }
-    public void setDosage(String dosage) { this.dosage = dosage; }
+    public String getAssignedTo() { return assignedTo; }
+    public void setAssignedTo(String assignedTo) { this.assignedTo = assignedTo; }
 
-    public String getFrequency() { return frequency; }
-    public void setFrequency(String frequency) { this.frequency = frequency; }
+    public Integer getPrescriptionId() { return prescriptionId; }
+    public void setPrescriptionId(Integer prescriptionId) { this.prescriptionId = prescriptionId; }
 
-    public String getDuration() { return duration; }
-    public void setDuration(String duration) { this.duration = duration; }
+    public Integer getFrequency() { return frequency; }
+    public void setFrequency(Integer frequency) { this.frequency = frequency; }
 
+    public Integer getDosage() { return dosage; }
+    public void setDosage(Integer dosage) { this.dosage = dosage; }
+
+    public Boolean getTakenToday() { return takenToday; }
+    public void setTakenToday(Boolean takenToday) { this.takenToday = takenToday; }
+
+    // Method to get full medication details in a readable format
     public String getFullMedicationDetails() {
-        return "Medication: " + medicationName + ", Dosage: " + dosage + ", Frequency: " + frequency + ", Duration: " + duration;
+        return "Medication: " + medicationName + ", Assigned to Patient ID: " + assignedTo +
+                ", Prescription ID: " + prescriptionId + ", Frequency: " + frequency +
+                ", Dosage: " + dosage + ", Taken Today: " + takenToday;
     }
 }

@@ -25,6 +25,11 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    //@GetMapping("/type/{userType}")
+    //public List<User> getUsersByType(@PathVariable String userType) {
+     //   return userService.getUsersByType(userType);
+    //}
+
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
